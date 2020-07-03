@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5WY-Ai-alM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="myCoordinates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zAk-ml-NmA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-8M-wKV">
+                                <rect key="frame" x="344" y="190" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h2G-8M-wKV" secondAttribute="height" multiplier="1:1" id="95E-hN-Oiv"/>
+                                    <constraint firstAttribute="width" constant="50" id="ptq-QE-aMy"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.35294117650000001" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="imageEdgeInsets" minX="7" minY="10" maxX="7" maxY="9"/>
+                                <state key="normal" image="heart.fill" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="heartButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ac2-ip-Dbe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-DX-0fD">
+                                <rect key="frame" x="344" y="250" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="C6I-DX-0fD" secondAttribute="height" multiplier="1:1" id="kdw-Zx-sUB"/>
+                                    <constraint firstAttribute="width" constant="50" id="wwf-BN-byW"/>
+                                </constraints>
+                                <state key="normal" title="Add"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fso-tt-XV9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zAk-ml-NmA" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2Qn-lI-7Ru"/>
+                            <constraint firstItem="C6I-DX-0fD" firstAttribute="centerX" secondItem="h2G-8M-wKV" secondAttribute="centerX" id="45B-HB-w4h"/>
+                            <constraint firstItem="h2G-8M-wKV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Q2w-kv-HRj"/>
+                            <constraint firstItem="C6I-DX-0fD" firstAttribute="width" secondItem="C6I-DX-0fD" secondAttribute="height" multiplier="1:1" id="U7w-u9-6LD"/>
+                            <constraint firstAttribute="bottom" secondItem="zAk-ml-NmA" secondAttribute="bottom" id="b8c-vQ-kqv"/>
+                            <constraint firstItem="zAk-ml-NmA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="du2-gj-qZm"/>
+                            <constraint firstAttribute="trailing" secondItem="zAk-ml-NmA" secondAttribute="trailing" id="hk3-lA-DvN"/>
+                            <constraint firstItem="C6I-DX-0fD" firstAttribute="top" secondItem="h2G-8M-wKV" secondAttribute="bottom" constant="10" id="iaW-C9-G6G"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h2G-8M-wKV" secondAttribute="trailing" constant="20" id="yN0-D8-EeM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tDW-5h-hlf"/>
+                    <connections>
+                        <outlet property="mapView" destination="zAk-ml-NmA" id="dgV-fw-cXB"/>
+                        <segue destination="h0n-Mz-Xjr" kind="show" identifier="mapToSaved" id="q5u-jL-lzJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1105.7971014492755" y="126.5625"/>
+        </scene>
+        <!--Saved List Screen-->
+        <scene sceneID="8k2-xT-XqL">
+            <objects>
+                <viewController id="h0n-Mz-Xjr" customClass="SavedListScreen" customModule="myCoordinates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fkk-4K-v6m">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xg4-FW-scM">
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="coordinateCell" id="woI-V7-mPM">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="woI-V7-mPM" id="iUf-6O-5Qm">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="xg4-FW-scM" secondAttribute="bottom" id="LdV-wy-uTm"/>
+                            <constraint firstItem="xg4-FW-scM" firstAttribute="leading" secondItem="Fkk-4K-v6m" secondAttribute="leading" id="TGY-QV-tjC"/>
+                            <constraint firstAttribute="trailing" secondItem="xg4-FW-scM" secondAttribute="trailing" id="cCA-vv-zGy"/>
+                            <constraint firstItem="xg4-FW-scM" firstAttribute="top" secondItem="TvT-4K-GX6" secondAttribute="top" id="gde-cS-8Ks"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TvT-4K-GX6"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DOv-zo-baC"/>
+                    <connections>
+                        <outlet property="locationsTableView" destination="xg4-FW-scM" id="mLe-sV-gLR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jjW-iw-Opr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1952.1739130434785" y="126.5625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zWO-v8-wSk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5WY-Ai-alM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="HJj-T5-jYD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.35294117650000001" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bG9-VR-grE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I52-fL-Prf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="195.6521739130435" y="126.5625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
+    </resources>
+</document>
