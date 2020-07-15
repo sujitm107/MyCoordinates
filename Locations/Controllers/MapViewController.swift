@@ -30,7 +30,6 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         
         savedLocations = [
-            namedCoordinate(name: "Madison Square Garden", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: 40.7505)!, longitude: CLLocationDegrees(exactly: -73.9934)!)),
             namedCoordinate(name: "Harvard University", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: 42.3770)!, longitude: CLLocationDegrees(exactly: -71.1167)!)),
             namedCoordinate(name: "Google NY Building", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: 40.7284)!, longitude: CLLocationDegrees(exactly: -74.0099)!)),
             namedCoordinate(name: "Apple Spaceship", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: 37.3318)!, longitude: CLLocationDegrees(exactly: -122.0312)!)),
@@ -38,6 +37,8 @@ class MapViewController: UIViewController {
             namedCoordinate(name: "Disney World", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: 28.3852)!, longitude: CLLocationDegrees(exactly: -81.5639)!)),
             namedCoordinate(name: "McGill University", coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: 45.5048)!, longitude: CLLocationDegrees(exactly: -73.5772)!))
         ]
+        
+        LocationList.getInstance().loadLocations()
         
     }
         
@@ -127,9 +128,12 @@ class MapViewController: UIViewController {
             if string.count == 0 {
                 string = defaultString
             }
-            
-            let temp: namedCoordinate = namedCoordinate(name: string, coordinate: location)
-            self.savedLocations.append(temp)
+            DispatchQueue.main.async {
+                let temp: namedCoordinate = namedCoordinate(name: string, coordinate: location)
+                self.savedLocations.append(temp)
+                LocationList.getInstance().saveLocation(coordinate: temp)
+            }
+                
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (UIAlertAction) in
@@ -150,6 +154,7 @@ class MapViewController: UIViewController {
     
     func resetMapView(){
         mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
     }
     
 }
@@ -160,16 +165,16 @@ extension MapViewController: CLLocationManagerDelegate {
     
     //Who's calling these methods? -- system
     //these are optional funcs, do they not have to implemented?
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        //We'll be back
-//        guard let location = locations.last else { return } // so locations is an array that is updating, do any of the locations terminate after a period of time? -- Yes A: multiple locations can come at a time, the most recent is at the end, hence, last
-//
-//        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //We'll be back
+        guard let location = locations.last else { return } // so locations is an array that is updating, do any of the locations terminate after a period of time? -- Yes A: multiple locations can come at a time, the most recent is at the end, hence, last
+
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
 //        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
 //
 //        mapView.setRegion(region, animated: true)
-//
-//    }
+
+    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //We'll be back
@@ -208,10 +213,18 @@ extension MapViewController: DirectionsDelegate {
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 
             }
+
         }
+        
+        let destAnnotation = MKPointAnnotation()
+        destAnnotation.coordinate = destination.coordinate
+        destAnnotation.title = destination.name
+        
+        mapView.addAnnotation(destAnnotation)
         
     }
     
+    //helper method
     func createDirectionsRequest(from start: CLLocationCoordinate2D, to dest: CLLocationCoordinate2D) -> MKDirections.Request {
         
         //need start and dest placemarks
@@ -221,7 +234,7 @@ extension MapViewController: DirectionsDelegate {
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: startingLocation)
         request.destination = MKMapItem(placemark: destination)
-        request.transportType = .walking
+        request.transportType = .automobile
         request.requestsAlternateRoutes = false
         
         return request

@@ -8,8 +8,9 @@
 
 import Foundation
 import MapKit
+import CoreData
 
-class namedCoordinate {
+public class namedCoordinate: NSObject{
     
     let name: String
     let coordinate: CLLocationCoordinate2D
